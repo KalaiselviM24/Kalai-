@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Comic Preview</title>
+<style>
+body { font-family: Arial, sans-serif; background: #f4f4f9;
+padding: 20px; }
+.container { max-width: 800px; margin: auto; }
+.panel-card {
+background: white;
+padding: 20px;
+border-radius: 8px;
+margin-bottom: 25px;
+box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+.panel-img { width: 100%; max-height: 450px; object-fit:
+cover; border-radius: 6px; }
+.scene-desc { font-style: italic; color: #555; margin: 10px 0;
+}
+.download-btn {
+display: block;
+width: 100%;
+text-align: center;
+background: #1a73e8;
+color: white;
+padding: 15px;
+text-decoration: none;
+border-radius: 8px;
+font-size: 18px;
+font-weight: bold;
+}
+</style>
+</head>
+<body>
+<div class="container">
+<h1 style="text-align: center;">📖 Your Comic Preview</h1>
+{% for panel in layout %}
+<div class="panel-card">
+<h2>Panel {{ panel.panel }}: {{ panel.title }}</h2>
+<img class="panel-img" src="/{{ panel.image_path }}"
+alt="Panel Image">
+<p class="scene-desc">{{ panel.scene_description }}</p>
+<div>{{ panel.text | replace('\n', '<br>') | safe }}</div>
+</div>
+{% endfor %}
+<a class="download-btn" href="/export-success?pdf_path={{
+pdf_path }}">📖 Download Your Comic as PDF</a>
+</div>
+</body>
+</html>
